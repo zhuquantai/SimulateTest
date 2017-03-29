@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">SimulateTest</string>
+
+    <string name="auto_test">Auto Test</string>
+    <string name="initial">Initial (adb shell)</string>
+    <string name="enable_test">Enable Test</string>
+    <string name="disable_test">Disable Test</string>
+    <string name="set_isdm_value">Set ISDM</string>
+    <string name="set_at_value">Analog data(AT)</string>
+    <string name="update_sim">Update SIM</string>
+    <string name="update_ui">Update UI</string>
+
+    <string name="set_isdm_text">Isdm:</string>
+    <string name="set_value_text">Value:</string>
+    <string name="action_save">save</string>
+
+</resources>

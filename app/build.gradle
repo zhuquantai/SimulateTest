@@ -1,0 +1,62 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    signingConfigs {
+        release {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('./../signed_TCL/debug.keystore')
+            storePassword 'android'
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.jrdcom.simulatetest"
+        minSdkVersion 21
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+        disable 'MissingTranslation'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig(signingConfigs.release)
+        }
+
+        debug {
+            signingConfig(signingConfigs.release)
+        }
+
+    }
+}
+
+dependencies {
+    /*androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.1', {
+            exclude group: 'com.android.support', module: 'support-annotations'
+        })*/
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    testCompile 'junit:junit:4.12'
+    compile files('libs/jxl.jar')
+}
+
+task signAPK(type: Exec, dependsOn: 'assembleRelease') {
+    def keyPath = "./../signed_TCL/"
+    def appPath = "."
+    def moduleName = this.name
+    commandLine keyPath + '/signAPK.sh' , keyPath , appPath , moduleName
+    standardOutput = new ByteArrayOutputStream()
+    println standardOutput
+}
