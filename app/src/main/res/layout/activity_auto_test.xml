@@ -10,10 +10,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.jrdcom.simulatetest.AutoTest">
-    <TextView
-        android:id="@+id/auto_test_list_view"
+    <ListView
+        android:id="@+id/lv_auto_test"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

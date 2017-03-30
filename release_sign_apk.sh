@@ -6,6 +6,7 @@ java -jar ./TCLSignApk/signapk.jar ./TCLSignApk/TCL_ReleaseKeys/platform.x509.pe
 
 #adb install -r /local/AndroidStudioProjects/SimulateTest/app/build/outputs/apk/SimulateTest_signedTcl.apk
 adb remount
-adb shell mkdir /system/priv-app/SimulateTest
-adb shell rm /system/priv-app/SimulateTest/SimulateTest_signedTcl.apk
-adb push ./app/build/outputs/apk/SimulateTest_signedTcl.apk /system/priv-app/SimulateTest/
+# adb shell mkdir /system/priv-app/SimulateTest
+# adb shell rm /system/priv-app/SimulateTest/SimulateTest_signedTcl.apk
+# adb push ./app/build/outputs/apk/SimulateTest_signedTcl.apk /system/priv-app/SimulateTest/
+adb install -r ./app/build/outputs/apk/SimulateTest_signedTcl.apk

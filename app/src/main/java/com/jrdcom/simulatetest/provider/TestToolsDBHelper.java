@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.util.HashMap;
+
 /**
  * Created by user on 3/26/17.
  */
@@ -16,6 +18,9 @@ public class TestToolsDBHelper extends SQLiteOpenHelper {
     private static final int VERSION =1;
     private static TestToolsDBHelper instanse = null;
     public static final  String  ISDM_TABLE = "isdmTable";
+    public static final  String  COLUMN_ISDM_NAME = "isdmName";
+    public static final  String  COLUMN_ISDM_VALUE = "value";
+
     public static String DATA_BASE_NAME = "TestToolsDBHelper.db";
 
 
@@ -25,12 +30,12 @@ public class TestToolsDBHelper extends SQLiteOpenHelper {
         Log.d(TAG, "wanying TestToolsDBHDATA_BASE_NAME");
     }
 
-  /*  public static TestToolsDBHelper getinstanse (Context context){
+    public static TestToolsDBHelper getInstanse (Context context){
         if(instanse == null){
-            instanse = new TestToolsDBHelper(context ) ;
+            instanse = new TestToolsDBHelper(context) ;
         }
         return instanse;
-    }*/
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(TAG, "wanying TestToolsDBHelper--");
@@ -68,6 +73,4 @@ public class TestToolsDBHelper extends SQLiteOpenHelper {
          onCreate(db);
      }
     }
-
-
 }
