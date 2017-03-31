@@ -17,13 +17,13 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/auto_test"
-            android:text="@string/auto_test"
+            android:id="@+id/initial"
+            android:text="@string/initial"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
-            android:id="@+id/initial"
-            android:text="@string/initial"
+            android:id="@+id/auto_test"
+            android:text="@string/auto_test"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
@@ -49,6 +49,11 @@
         <Button
             android:id="@+id/update_ui"
             android:text="@string/update_ui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/restore"
+            android:text="@string/restore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

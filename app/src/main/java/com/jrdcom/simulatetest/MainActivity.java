@@ -5,47 +5,51 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.jrdcom.simulatetest.isdm.SelectIsdmActivity;
-import com.jrdcom.simulatetest.parser.ParseExcel;
-import com.jrdcom.simulatetest.utils.Log;
+import com.jrdcom.simulatetest.utils.DBUtils;
+import com.jrdcom.simulatetest.utils.ParseExcelUtil;
 import com.jrdcom.simulatetest.utils.ShellUtils;
 import com.jrdcom.simulatetest.utils.SystemProperties;
+import com.jrdcom.simulatetest.utils.TestInfoBean;
 import com.jrdcom.simulatetest.utils.Utils;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
     private Button mInitialBtn;
     private Button mEnableTestBtn;
-    private Button mSetISDMBtn;
     private Button mAutoTest;
+    private Button mSetISDMBtn;
+    private Button mSetAT;
+    private Button mUpdateSim;
+    private Button mUpdateUI;
     private boolean isEnableTest = false;
     private String mIsdm = "";
-    private static String SET_SYSTEM_PROPRITY = "set_system_Properties";
-    ParseExcel mParseExcel;
-    Context context;
+    Context mContext;
 
     private static final int REQUEST_CODE_PICK_ISDM = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate: ++");
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "wanying savedInstanceState");
         setContentView(R.layout.activity_main);
-        //context = getApplicationContext();
-        context = getBaseContext();
-        mParseExcel =new ParseExcel(context);
+        mContext = getBaseContext();
         mInitialBtn = (Button) findViewById(R.id.initial);
         if (mInitialBtn != null) {
             mInitialBtn.setOnClickListener(this);
         }
+        SystemProperties.set("sys.tel.test.prop", "zqzzzt");
         mInitialBtn.setVisibility(View.GONE);
-        mAutoTest = (Button) findViewById(R.id.auto_test) ;
+        mAutoTest = (Button) findViewById(R.id.auto_test);
         mAutoTest.setOnClickListener(this);
 
-
+        readExcelDataToDatabase();
         /*isEnableTest = isEnableTest();*/
         init();
         Log.d(TAG, "isEnableTest:" + isEnableTest);
@@ -66,38 +70,38 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private void readExcelDataToDatabase() {
+        Log.d(TAG, "readExcelDataToDatabase: ++");
+        List<TestInfoBean> beans = ParseExcelUtil.readAllExcelData();
+        DBUtils.saveTestInfoBeanList(mContext, beans);
+        Log.d(TAG, "readExcelDataToDatabase: --");
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.initial: {
+            case R.id.initial:
                 Boolean isRoot = ShellUtils.checkRootPermission();
                 Log.d(TAG, "onClick isRoot:" + isRoot);
-            }
-            break;
-            /*case R.id.enable_test: {
-                Log.d(TAG, "onClick before isEnableTest:" + isEnableTest);
-                if(isEnableTest){
-                    SystemProperties.set("sys.tel.test.start", "1");
-                    isEnableTest = isEnableTest();
-                    mEnableTestBtn.setText(R.string.disable_test);
-                }else{
-                    SystemProperties.set("sys.tel.test.start", "0");
-                    isEnableTest = isEnableTest();
-                    mEnableTestBtn.setText(R.string.enable_test);
-                }
-                Log.d(TAG, "onClick after isEnableTest:" + isEnableTest);
-            }
-            break;*/
-            case R.id.set_isdm_value: {
-                startActivityForResult(new Intent(this, SelectIsdmActivity.class), REQUEST_CODE_PICK_ISDM);
-            }
-            break;
+                break;
             case R.id.auto_test:
-             Intent intent = new Intent(this, AutoTest.class);
-                Log.d(TAG,"wanying auto_test");
+                Intent intent = new Intent(this, AutoTest.class);
+                Log.d(TAG, "wanying auto_test");
                 this.startActivity(intent);
-
-            break;
+                break;
+            case R.id.set_isdm_value:
+                startActivityForResult(new Intent(this, SelectIsdmActivity.class), REQUEST_CODE_PICK_ISDM);
+                break;
+            case R.id.set_at_value:
+                break;
+            case R.id.update_sim:
+                break;
+            case R.id.update_ui:
+                break;
+            case R.id.restore:
+                break;
+            default:
+                break;
 
         }
     }
@@ -120,25 +124,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-   /* public boolean isEnableTest(){
-        return "true".equals(SystemProperties.get("sys.tel.test.start", "false"));
-    }*/
-
     public void init() {
         SystemProperties.set("sys.tel.test.start", "true");
     }
-
-    /**
-     *
-     */
-
-
-
-
-
-
-
-
 
 
     protected void onDestroy() {

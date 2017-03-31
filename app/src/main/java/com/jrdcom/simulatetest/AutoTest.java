@@ -4,13 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-import com.jrdcom.simulatetest.parser.ParseExcel;
-import com.jrdcom.simulatetest.provider.TestExcelInfo;
+import com.jrdcom.simulatetest.utils.ParseExcelUtil;
+import com.jrdcom.simulatetest.utils.TestInfoBean;
 import com.jrdcom.simulatetest.utils.AutoTestAdapter;
 import com.jrdcom.simulatetest.utils.DBUtils;
 
@@ -21,10 +18,10 @@ import java.util.List;
 public class AutoTest extends AppCompatActivity {
     private static final String TAG = "AutoTest";
     List caseTestList;
-    ParseExcel mp;
-    TestExcelInfo info;
+    ParseExcelUtil mp;
+    TestInfoBean info;
     HashMap mTestData = new HashMap();
-    List<TestExcelInfo> mAllData;
+    List<TestInfoBean> mAllData;
     Context mContext;
     ListView lv_auto_test;
 
@@ -37,7 +34,7 @@ public class AutoTest extends AppCompatActivity {
         caseTestList = new ArrayList();
         //mp = new ParseExcel(mContext);
         //info = mp.getTestExcelInfo();
-        mAllData = DBUtils.getAllData(mContext);
+        mAllData = DBUtils.getAllTestData(mContext);
         Log.d(TAG, "onCreate: allData = " + mAllData.toString());
         lv_auto_test.setAdapter(new AutoTestAdapter(mContext, mAllData));
        /* caseTestList.add(info);

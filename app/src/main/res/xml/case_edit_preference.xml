@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:title="Case Title"
+        android:key="case_title"
+        android:editable="false"
+        android:inputType="text"
+        />
+    <EditTextPreference
+        android:title="Case ISDM"
+        android:key="case_isdm"
+        android:editable="false"
+        android:inputType="text"
+        />
+    <EditTextPreference
+        android:editable="true"
+        android:title="Case AT"
+        android:key="case_at"
+        android:inputType="text"
+        />
+    <ListPreference
+        android:editable="true"
+        android:title="Case Record Type"
+        android:key="case_record_type"
+        android:entries="@array/record_types"
+        android:entryValues="@array/record_types"
+        android:inputType="text"
+        />
+    <SwitchPreference
+        android:editable="true"
+        android:title="Case Refresh UI"
+        android:key="case_ui"
+        android:inputType="text"
+        />
+</PreferenceScreen>
