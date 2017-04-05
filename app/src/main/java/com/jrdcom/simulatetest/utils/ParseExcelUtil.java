@@ -2,6 +2,9 @@ package com.jrdcom.simulatetest.utils;
 
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.jrdcom.simulatetest.beans.TestInfoBean;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

@@ -13,15 +13,26 @@ public class TestToolsDBHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "TestToolsDBHelper";
     private static final int VERSION = 1;
+
     public static final String DATA_BASE_NAME = "TestToolsDBHelper.db";
-    public static final String TABLE_NAME = "isdmTable";
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_TITLE = "title";
-    public static final String COLUMN_DESCRIPTION = "description";
-    public static final String COLUMN_ISDM = "isdm";
-    public static final String COLUMN_AT = "at";
-    public static final String COLUMN_RECORD_TYPE = "type";
-    public static final String COLUMN_UI = "ui";
+    //define for caseTable
+    public static final String TABLE_NAME_CASE = "caseTable";
+    public static final String COLUMN_CASE_ID = "_id";
+    public static final String COLUMN_CASE_TITLE = "title";
+    public static final String COLUMN_CASE_DESCRIPTION = "description";
+    public static final String COLUMN_CASE_ISDM = "isdm";
+    public static final String COLUMN_CASE_AT = "at";
+    public static final String COLUMN_CASE_RECORD_TYPE = "type";
+    public static final String COLUMN_CASE_UI = "ui";
+
+    //define for plf table
+    public static final String TABLE_NAME_PLF = "plfTable";
+    public static final String COLUMN_PLF_ID = "_id";
+    public static final String COLUMN_PLF_ISDM_ID = "isdm_id";
+    public static final String COLUMN_PLF_META_TYPE = "meta_type";
+    public static final String COLUMN_PLF_FEATURE = "feature";
+    public static final String COLUMN_PLF_DESCRIPTION = "description";
+    public static final String COLUMN_PLF_DEFAULT_VALUE = "default_value";
 
     private static TestToolsDBHelper instance = null;
 
@@ -42,24 +53,37 @@ public class TestToolsDBHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * 创建用户表
+     * Create tables in databases.
      *
-     * @param db
+     * @param db database
      */
     private void createTableUser(SQLiteDatabase db) {
         Log.d(TAG, "createTableUser: ++");
         String sql = "CREATE TABLE " +
-                TABLE_NAME + " (" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-                COLUMN_TITLE + " TEXT UNIQUE ON CONFLICT REPLACE," +
-                COLUMN_DESCRIPTION + " TEXT," +
-                COLUMN_ISDM + " TEXT," +
-                COLUMN_AT + " TEXT," +
-                COLUMN_RECORD_TYPE + " TEXT," +
-                COLUMN_UI + " TEXT" +
+                TABLE_NAME_CASE + " (" +
+                COLUMN_CASE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_CASE_TITLE + " TEXT UNIQUE ON CONFLICT REPLACE," +
+                COLUMN_CASE_DESCRIPTION + " TEXT," +
+                COLUMN_CASE_ISDM + " TEXT," +
+                COLUMN_CASE_AT + " TEXT," +
+                COLUMN_CASE_RECORD_TYPE + " TEXT," +
+                COLUMN_CASE_UI + " TEXT" +
                 ");";
         db.execSQL(sql);
+        Log.d(TAG, "createTableUser: create table "+TABLE_NAME_CASE);
+        sql = "CREATE TABLE " +
+                TABLE_NAME_PLF + " (" +
+                COLUMN_PLF_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
+                COLUMN_PLF_ISDM_ID + " TEXT UNIQUE ON CONFLICT REPLACE," +
+                COLUMN_PLF_META_TYPE + " TEXT," +
+                COLUMN_PLF_FEATURE + " TEXT," +
+                COLUMN_PLF_DESCRIPTION + " TEXT," +
+                COLUMN_PLF_DEFAULT_VALUE + " TEXT" +
+                ");";
+        db.execSQL(sql);
+        Log.d(TAG, "createTableUser: create table "+TABLE_NAME_PLF);
         Log.d(TAG, "createTableUser: --");
+
     }
 
     @Override

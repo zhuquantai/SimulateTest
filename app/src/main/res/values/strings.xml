@@ -18,9 +18,9 @@
     <string name="at">AT: </string>
     <string name="RecordType">RecordType:</string>
     <string name="refreshui">RefreshUI:</string>
-    <string name="restore">Restore</string>
+    <string name="resume">Resume</string>
 
-    <array name="record_types" >
+    <array name="record_types">
         <item>spn</item>
         <item>imsi</item>
         <item>spdi</item>
@@ -29,5 +29,15 @@
         <item>lons</item>
         <item>sons</item>
     </array>
+    <string name="title_activity_sdmconfig">SDMConfigActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="input_sdmid">Input SDMID</string>
+    <string name="isdm_id">SDMID: </string>
+    <string name="value">VALUE:</string>
+    <string name="input_value">Input Value</string>
+    <string name="clear">CLEAR</string>
+    <string name="save">SAVE</string>
+    <string name="clear_all">CLEAR ALL</string>
+    <string name="add">add</string>
 
 </resources>
